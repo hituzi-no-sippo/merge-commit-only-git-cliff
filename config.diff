@@ -1,0 +1,35 @@
+--- cliff.toml	2023-02-05 19:57:23.288790000 +0900
++++ merge-commit-only.toml	2023-02-05 19:57:41.898790000 +0900
+@@ -42,21 +42,21 @@
+ ]
+ # regex for parsing and grouping commits
+ commit_parsers = [
+-    { message = "^feat", group = "Features"},
+-    { message = "^fix", group = "Bug Fixes"},
+-    { message = "^doc", group = "Documentation"},
+-    { message = "^perf", group = "Performance"},
+-    { message = "^refactor", group = "Refactor"},
+-    { message = "^style", group = "Styling"},
+-    { message = "^test", group = "Testing"},
+-    { message = "^chore\\(release\\): prepare for", skip = true},
+-    { message = "^chore", group = "Miscellaneous Tasks"},
+-    { body = ".*security", group = "Security"},
++    { message = "^feat.*\n+Merge branch '.*'\n$", group = "Features"},
++    { message = "^fix.*\n+Merge branch '.*'\n$", group = "Bug Fixes"},
++    { message = "^doc.*\n+Merge branch '.*'\n$", group = "Documentation"},
++    { message = "^perf.*\n+Merge branch '.*'\n$", group = "Performance"},
++    { message = "^refactor.*\n+Merge branch '.*'\n$", group = "Refactor"},
++    { message = "^style.*\n+Merge branch '.*'\n$", group = "Styling"},
++    { message = "^test.*\n+Merge branch '.*'\n$", group = "Testing"},
++    { message = "^chore\\(release\\): prepare for.*\n+Merge branch '.*'\n$", skip = true},
++    { message = "^chore.*\n+Merge branch '.*'\n$", group = "Miscellaneous Tasks"},
++    { body = ".*security.*\n+Merge branch '.*'\n$", group = "Security"},
+ ]
+ # protect breaking changes from being skipped due to matching a skipping commit_parser
+ protect_breaking_commits = false
+ # filter out the commits that are not matched by commit parsers
+-filter_commits = false
++filter_commits = true
+ # glob pattern for matching git tags
+ tag_pattern = "v[0-9]*"
+ # regex for skipping tags
